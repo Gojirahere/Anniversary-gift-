@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>September, somehow. — For Kammo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="webgl"></div>
+<div id="butterflyCanvasWrap"><canvas id="butterflyCanvas"></canvas></div>
+<div class="progress-bar" id="progress"></div>
+<div class="hint">tap · swipe · play the games</div>
+<div id="sceneCounter">01 / 21</div>
+<div id="toast"></div>
+
+<div id="musicBar">
+  <button id="playSong" aria-label="Play song">♪</button>
+  <span>Regardless — Asim Azhar</span>
+</div>
+<div id="daysCounter">Day <b id="dayNum">1</b> with you</div>
+
+
+<div id="lightbox">
+  <button id="closeLb" aria-label="Close">×</button>
+  <img id="lightboxImg" src="" alt="Memory">
+  <div id="lightboxCap"></div>
+</div>
+
+<!-- 0 INTRO -->
+<div class="scene active" data-index="0">
+  <div class="intro-content">
+    <div class="eyebrow">A little world made for one person</div>
+    <h1 class="title">September,<br><em>somehow.</em></h1>
+    <p class="lead">Some stories arrive loudly. Ours didn’t. It slipped into an ordinary month, stayed a little longer than expected, and somehow became something worth making a whole little universe for.</p>
+    <button class="enter-btn" data-next>Enter the story →</button>
+  </div>
+  <div class="dedication">For the girl<br>who made September mean something</div>
+</div>
+
+<!-- 1 LONGER LETTER -->
+<div class="scene" data-index="1">
+  <div class="scene-inner letter-inner">
+    <div class="chapter">01 / A LETTER</div>
+    <h2>Before I met you</h2>
+    <div class="long-letter">
+      <p>Kammo,</p>
+      <p>I keep thinking about the version of you that existed before any of this. The one who already had her own quiet world, her own songs, her own places that felt like home, her own way of carrying things without making them heavy.</p>
+      <p>I never wanted to interrupt that version. I just wanted to be allowed to stand near it. To notice the little rituals, the soft expressions you make when you think no one is looking, the way you still light up talking about things you loved long before me.</p>
+      <p>You already knew how to be interesting. You already knew how to be soft and stubborn at the same time. You already had a whole personality that didn’t need me to complete it.</p>
+      <p>And somehow, that made everything better. Because I didn’t fall for a blank page. I fell for someone who already had chapters.</p>
+      <p class="signature">— still reading them</p>
+    </div>
+    <button class="btn" data-next>Continue</button>
+  </div>
+</div>
+
+<!-- 2 ORDINARY -->
+<div class="scene" data-index="2">
+  <div class="scene-inner">
+    <div class="chapter">02 / ORDINARY MAGIC</div>
+    <h2>The ordinary days</h2>
+    <p>The way you still get excited over the same songs. How you remember tiny details most people forget. The soft way you exist when you think no one is watching. Those are the things that stayed. Not the big dramatic moments — the small, repeated ones that quietly rewired everything.</p>
+    <button class="btn" data-next>Next</button>
+  </div>
+</div>
+
+<!-- 3 GALLERY -->
+<div class="scene" data-index="3">
+  <div class="scene-inner gallery-inner">
+    <div class="chapter">03 / FRAMES</div>
+    <h2>Pieces of her</h2>
+    <p class="gallery-note">Drag to spin · tap any photo to open</p>
+    <div id="photoStage"></div>
+    <button class="btn" data-next>Continue</button>
+  </div>
+</div>
+
+<!-- 4 PAST -->
+<div class="scene" data-index="4">
+  <div class="scene-inner">
+    <div class="chapter">04 / BEFORE</div>
+    <h2>Things from before</h2>
+    <p>The version of you that existed before me still lives in the way you laugh at old stories, the way certain places still feel like home to you, the quiet strength you already had. I never wanted to change any of it. Only to protect it and keep noticing it.</p>
+    <button class="btn" data-next>Next</button>
+  </div>
+</div>
+
+<!-- 5 WOULD YOU RATHER -->
+<div class="scene" data-index="5">
+  <div class="scene-inner game-inner">
+    <div class="chapter">05 / PLAY WITH ME</div>
+    <h2>Would you rather…</h2>
+    <p class="game-sub">Tap one. No wrong answers. Only chaos.</p>
+    <div class="wyr-options" id="wyrBox">
+      <button class="wyr-btn" data-choice="a">Stay up all night talking about nothing important</button>
+      <button class="wyr-btn" data-choice="b">Spend the whole day doing absolutely nothing together and still feel like it was perfect</button>
+    </div>
+    <div id="wyrResult" class="game-result"></div>
+    <button class="btn" data-next style="margin-top:1.8rem">Next challenge</button>
+  </div>
+</div>
+
+<!-- 6 QUIZ -->
+<div class="scene" data-index="6">
+  <div class="scene-inner game-inner">
+    <div class="chapter">06 / QUICK QUIZ</div>
+    <h2>How well do you know us?</h2>
+    <p class="game-sub" id="quizQuestion">What made September feel different?</p>
+    <div class="quiz-options" id="quizBox">
+      <button class="quiz-btn" data-correct="1">The quiet way everything started feeling like “us”</button>
+      <button class="quiz-btn" data-correct="0">The dramatic movie-scene beginning</button>
+      <button class="quiz-btn" data-correct="0">The perfectly planned timeline</button>
+    </div>
+    <div id="quizResult" class="game-result"></div>
+    <button class="btn" data-next style="margin-top:1.8rem">Continue</button>
+  </div>
+</div>
+
+<!-- 7 HEART CATCH -->
+<div class="scene" data-index="7">
+  <div class="scene-inner game-inner">
+    <div class="chapter">07 / MINI GAME</div>
+    <h2>Catch the hearts</h2>
+    <p class="game-sub">Tap the floating hearts. Collect 7 for a tiny reward.</p>
+    <div id="heartGame" class="heart-game">
+      <div id="heartScore">0 / 7</div>
+      <div id="heartField"></div>
+    </div>
+    <div id="heartReward" class="game-result" style="display:none"></div>
+    <button class="btn" data-next style="margin-top:1.5rem">I’m done playing (for now)</button>
+  </div>
+</div>
+
+<!-- 8 COMFORT -->
+<div class="scene" data-index="8">
+  <div class="scene-inner">
+    <div class="chapter">08 / LITTLE TRUTHS</div>
+    <h2>Things I keep noticing</h2>
+    <div class="comfort-row">
+      <span class="comfort" data-msg="The things you loved long before we met are still part of what makes you you.">past</span>
+      <span class="comfort" data-msg="You carry old memories gently, and I hope you always keep that softness.">soft</span>
+      <span class="comfort" data-msg="The tiny habits that are only yours are the ones I remember most.">hers</span>
+      <span class="comfort" data-msg="You made an ordinary September feel like the beginning of something permanent.">true</span>
+      <span class="comfort" data-msg="Even your chaos somehow feels like home.">chaos</span>
+    </div>
+    <div id="comfortMessage"></div>
+    <button class="btn" data-next>Continue</button>
+  </div>
+</div>
+
+<!-- 9 HEAVY DAYS LETTER -->
+<div class="scene" data-index="9">
+  <div class="scene-inner letter-inner">
+    <div class="chapter">09 / FOR THE HEAVY DAYS</div>
+    <h2>If the day feels heavy</h2>
+    <div class="long-letter">
+      <p>Some days will be louder than others. Some days your mind will try to convince you that you’re too much, or not enough, or that the future is only scary.</p>
+      <p>On those days I want you to remember this: you don’t have to perform being okay. You don’t have to shrink your dreams because someone else doesn’t understand them. You don’t have to be productive every second to deserve rest.</p>
+      <p>You are allowed to be curious, ambitious, stubborn, soft, weird, and still figuring things out — all at the same time.</p>
+      <p>And if you ever forget, I’ll remind you. Quietly. Without making it a big speech. Just the way we already do.</p>
+      <p class="signature">— always on your side</p>
+    </div>
+    <button class="btn" data-next>Next</button>
+  </div>
+</div>
+
+<!-- 10 CHALLENGE -->
+<div class="scene" data-index="10">
+  <div class="scene-inner game-inner">
+    <div class="chapter">10 / A SMALL CHALLENGE</div>
+    <h2>One thing for later</h2>
+    <p class="game-sub">You don’t have to answer now. Just keep it.</p>
+    <div class="challenge-card">
+      <p>Sometime this week, tell me one small thing about your past that you’ve never mentioned before — not because it’s dramatic, just because it’s yours.</p>
+      <p style="margin-top:1rem;opacity:.75;font-size:.9rem">No pressure. Just an open door.</p>
+    </div>
+    <button class="btn" data-next>I accept (quietly)</button>
+  </div>
+</div>
+
+<!-- 11 THINGS I LOVE -->
+<div class="scene" data-index="11">
+  <div class="scene-inner game-inner">
+    <div class="chapter">11 / A LIST</div>
+    <h2>Things I love about you</h2>
+    <p class="game-sub">Tap each one. They’re all true.</p>
+    <div class="love-list" id="loveList">
+      <button class="love-item">The way you get excited over small things</button>
+      <button class="love-item">How soft you become when you’re comfortable</button>
+      <button class="love-item">Your chaos that somehow feels like home</button>
+      <button class="love-item">The way you remember tiny details</button>
+      <button class="love-item">That you already had a whole world before me</button>
+      <button class="love-item">How you still choose to let me in</button>
+    </div>
+    <div id="loveProgress" class="game-result"></div>
+    <button class="btn" data-next style="margin-top:1.6rem">Continue</button>
+  </div>
+</div>
+
+<!-- 12 DISTANCE -->
+<div class="scene" data-index="12">
+  <div class="scene-inner">
+    <div class="chapter">12 / THE DISTANCE</div>
+    <h2>947 km</h2>
+    <p>Somehow the distance never felt louder than the connection.  
+    The messages, the late replies that still mattered, the quiet “I’m here” energy — it all travelled further than the kilometres.</p>
+    <p style="margin-top:1rem;color:#ffb6c1;font-family:'Cormorant Garamond',serif;font-style:italic">Some people feel far even when they’re close.  
+    You somehow felt close even when you were far.</p>
+    <button class="btn" data-next>Next</button>
+  </div>
+</div>
+
+<!-- 13 RATE THE MONTH -->
+<div class="scene" data-index="13">
+  <div class="scene-inner game-inner">
+    <div class="chapter">13 / PLAYFUL</div>
+    <h2>Rate this month</h2>
+    <p class="game-sub">Be honest. Or dramatic. Both are allowed.</p>
+    <div class="rate-row" id="rateRow">
+      <button class="rate-btn" data-rate="1">1 😭</button>
+      <button class="rate-btn" data-rate="2">2</button>
+      <button class="rate-btn" data-rate="3">3</button>
+      <button class="rate-btn" data-rate="4">4</button>
+      <button class="rate-btn" data-rate="5">5 ✨</button>
+    </div>
+    <div id="rateResult" class="game-result"></div>
+    <button class="btn" data-next style="margin-top:1.8rem">Continue</button>
+  </div>
+</div>
+
+<!-- 14 LOTUS INTRO -->
+<div class="scene" data-index="14">
+  <div class="scene-inner">
+    <div class="chapter">14 / FOR YOU</div>
+    <h2>This is for you</h2>
+    <p>A lotus that opens only for the girl who made the month mean something.<br>Watch it. Touch it if you want.</p>
+    <button class="btn" data-next>Open the lotus</button>
+  </div>
+</div>
+
+<!-- 15 LOTUS -->
+<div class="scene lotus-scene" data-index="15" id="lotusScene">
+  <div class="lotus-copy">
+    <p>for Kammo — one month<br><span>tap the flower or the button to bloom again</span></p>
+  </div>
+  <button id="bloomAgain" class="bloom-btn">BLOOM ✦</button>
+</div>
+
+<!-- 16 DAYS + SONG -->
+<div class="scene" data-index="19">
+  <div class="scene-inner">
+    <div class="chapter">16 / TIME</div>
+    <h2>Every day counts</h2>
+    <p>This little counter keeps moving even when we’re not looking at it.<br>One month is just the beginning of the number.</p>
+    <div class="big-counter"><span id="bigDayNum">30</span><small>days of choosing you</small></div>
+    <p style="margin-top:1.2rem;font-size:.9rem;color:#b090a0">Song for this chapter: <em style="color:#ffb6c1">Regardless — Asim Azhar</em></p>
+    <button class="btn" data-next>Continue</button>
+  </div>
+</div>
+
+<!-- 17 SCRATCH -->
+<div class="scene" data-index="17">
+  <div class="scene-inner game-inner">
+    <div class="chapter">17 / SECRET</div>
+    <h2>Scratch to reveal</h2>
+    <p class="game-sub">Use your finger like a real scratch card.</p>
+    <div class="scratch-wrap">
+      <canvas id="scratchCanvas" width="320" height="160"></canvas>
+      <div class="scratch-secret">I still choose you.<br>Every soft version of you.</div>
+    </div>
+    <button class="btn" data-next style="margin-top:1.6rem">I saw it</button>
+  </div>
+</div>
+
+<!-- 18 PROMISES -->
+<div class="scene" data-index="18">
+  <div class="scene-inner game-inner">
+    <div class="chapter">18 / PROMISES</div>
+    <h2>I promise you</h2>
+    <p class="game-sub">Tap each one.</p>
+    <div class="promise-list">
+      <button class="promise-btn">I’ll keep noticing the small things</button>
+      <button class="promise-btn">I’ll make space for your quiet days</button>
+      <button class="promise-btn">I’ll never ask you to shrink</button>
+      <button class="promise-btn">I’ll still choose you on ordinary Tuesdays</button>
+    </div>
+    <div id="promiseResult" class="game-result"></div>
+    <button class="btn" data-next style="margin-top:1.6rem">Continue</button>
+  </div>
+</div>
+
+<!-- 19 SOFT VULNERABILITY -->
+<div class="scene" data-index="19">
+  <div class="scene-inner letter-inner">
+    <div class="chapter">19 / WHY I PROTECT</div>
+    <h2>Some things I carry</h2>
+    <div class="long-letter">
+      <p>Kammo,</p>
+      <p>There are parts of my life that were not soft. Growing up, home was not always safe. There was anger, fear, and times I had to learn how to stay alert just to get through the day.</p>
+      <p>I also lived through things outside the house — situations where danger was real, where I tried to protect people and still watched loss happen. Those moments stay with a person. They change how you look at safety, how tightly you hold the ones you care about, and how quickly your body prepares for something to go wrong.</p>
+      <p>I don’t tell you this so you feel responsible for fixing it. You are not my therapist and you are not the reason any of it happened.</p>
+      <p>I tell you because when I’m with you, something in me softens. The part of me that is always scanning for danger learns, slowly, that it can rest. The part that learned to fight learns that it can choose gentleness instead.</p>
+      <p>If I ever become too protective, too intense, or too quick to react — it is not because of you. It is old wiring trying to keep safe the person it finally wants to keep.</p>
+      <p>You don’t have to carry my past. Just know that choosing you feels like the first place that has felt like home in a long time.</p>
+      <p class="signature">— still learning softness with you</p>
+    </div>
+    <button class="btn" data-next>One last thing</button>
+  </div>
+</div>
+
+<!-- 20 FINAL -->
+<div class="scene" data-index="20">
+  <div class="scene-inner">
+    <div class="chapter">20 / THE END (FOR NOW)</div>
+    <h2 class="final-title">September,<br><em>somehow.</em></h2>
+    <p class="final-copy">
+      I love the girl you were before me.<br>
+      I love the girl you are with me.<br>
+      And I already love whoever you’re still becoming.<br><br>
+      Thank you for letting me into the little world that was already yours.<br><br>
+      One month down. I still choose you.<br><br>
+      <span style="color:#ffb6c1;font-style:italic">P.S. — If you ever open this again on a hard day, remember: you’re still the softest plot twist of my year.</span>
+    </p>
+    <button class="btn" id="replay">Replay the whole story</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="./script.js"></script>
+
+<div id="spotifyDock">
+  <iframe id="spotifyEmbed" src="https://open.spotify.com/embed/track/1N5IwvKPg7PZeGi9Pvzvdo?utm_source=generator&theme=0" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+</body>
+</html>
