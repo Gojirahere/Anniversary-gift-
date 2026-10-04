@@ -430,7 +430,7 @@ document.addEventListener("keydown", unlockMusicOnce, { once: true });
 
 /* ========== DAYS COUNTER ========== */
 // Anniversary start: change this date if needed (YYYY-MM-DD)
-const START_DATE = new Date("2025-09-01T00:00:00");
+const START_DATE = new Date("2026-09-09T23:44:00");
 function updateDays() {
   const now = new Date();
   const diff = Math.max(1, Math.floor((now - START_DATE) / 86400000) + 1);
